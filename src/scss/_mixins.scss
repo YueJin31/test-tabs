@@ -1,0 +1,43 @@
+@mixin bp($point) {
+  @if $point == xsmall {
+    @media #{$mq-xsmall} {
+      @content;
+    }
+  } @else if $point == small {
+    @media #{$mq-small} {
+      @content;
+    }
+  } @else if $point == medium {
+    @media #{$mq-medium} {
+      @content;
+    }
+  } @else if $point == large {
+    @media #{$mq-large} {
+      @content;
+    }
+  } @else if $point == xlarge {
+    @media #{$mq-xlarge} {
+      @content;
+    }
+  } @else if $point == retina {
+    @media #{$mq-retina} {
+      @content;
+    }
+  }
+}
+
+@mixin bp-max($point) {
+  @if $point == small {
+    @media (max-width: ($bp-small - 1px)) {
+      @content;
+    }
+  } @else if $point == medium {
+    @media (max-width: ($bp-medium - 1px)) {
+      @content;
+    }
+  } @else if $point == large {
+    @media (max-width: ($bp-large - 1px)) {
+      @content;
+    }
+  }
+}
