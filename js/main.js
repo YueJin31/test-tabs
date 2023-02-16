@@ -1,30 +1,47 @@
-$(".tabs-content__item").hide();
-$(".tabs-content__item:first").show();
+const tabs = document.querySelectorAll(".tabs__list-item");
+const tabsContent = document.querySelectorAll(".tabs-content__item");
 
-$(".tabs__list-item").on("click", function () {
-  $(".tabs-content__item").hide();
+window.innerWidth < 768 ? initMobileTabs() : initDesktopTabs();
 
-  const activeTab = $(this).attr("rel");
-
-  $("#" + activeTab).fadeIn("slow");
-
-  $(".tabs__list-item").removeClass("active");
-  $(this).addClass("active");
-
-  $(".tabs-content__mobile").removeClass("active");
-  $(".tabs-content__mobile[rel^='" + activeTab + "']").addClass("active");
+window.addEventListener("resize", function () {
+  window.innerWidth < 768 ? initMobileTabs() : initDesktopTabs();
 });
 
-$(".tabs-content__mobile").on("click", function () {
-  $(".tabs-content__item").hide();
+function initMobileTabs() {
+  tabs.forEach(function (tab) {
+    const activeTab = tab.getAttribute("rel");
+    const activeContent = document.querySelector("#" + activeTab);
 
-  const activeMobileTab = $(this).attr("rel");
+    tab.appendChild(activeContent);
+  });
+}
 
-  $("#" + activeMobileTab).fadeIn("slow");
+function initDesktopTabs() {
+  const deskTabContent = document.querySelectorAll(".tabs__list .tabs-content__item");
+  const deskTabContainer = document.querySelector(".tabs-content");
 
-  $(".tabs-content__mobile").removeClass("active");
-  $(this).addClass("active");
+  deskTabContent.forEach((el) => {
+    deskTabContainer.append(el);
+  });
+}
 
-  $(".tabs__list-item").removeClass("active");
-  $(".tabs__list-item[rel^='" + activeMobileTab + "']").addClass("active");
+tabs.forEach(function (tab) {
+  tab.addEventListener("click", function () {
+    const activeTab = tab.getAttribute("rel");
+    const activeTabContent = document.querySelector("#" + activeTab);
+
+    if (this.classList.contains("active")) return;
+
+    tabsContent.forEach((el) => {
+      el.classList.remove("fadeIn");
+    });
+
+    activeTabContent.classList.add("fadeIn");
+
+    tabs.forEach((el) => {
+      el.classList.remove("active");
+    });
+
+    this.classList.add("active");
+  });
 });
