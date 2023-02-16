@@ -39,3 +39,17 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease-in 1 forwards;
+
+  @include bp-max(small) {
+    display: block !important;
+  }
+}
