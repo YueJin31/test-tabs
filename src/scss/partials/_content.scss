@@ -208,6 +208,7 @@
     &__item {
       height: 100%;
       opacity: 0;
+      display: none;
       padding: 15px;
       color: #f7f2df;
       background: url("../img/bg.jpg");
@@ -270,10 +271,6 @@
           border: 2px solid #f7f2df;
           color: #d6b500;
         }
-      }
-
-      &.active {
-        display: block;
       }
 
       &-body {
